@@ -66,79 +66,56 @@ function deviceBasedDynamicDimension(
   return null;
 }
 
-export default class HomeScreen extends React.Component {
+const INITIAL_DATA = [
+  {name: 'A'},
+  {name: 'B'},
+  {name: 'C'},
+  {name: 'D'},
+  {name: 'E'},
+  {name: 'F'},
+  {name: 'A'},
+  {name: 'B'},
+  {name: 'C'},
+  {name: 'D'},
+  {name: 'E'},
+  {name: 'F'},
+];
+
+export default class TestFlatList extends React.Component {
   constructor(props) {
     super(props);
   }
 
   state = {};
 
-  componentDidMount() {
-    const web3 = new Web3(
-      new Web3.providers.HttpProvider('https://mainnet.infura.io/'),
+  componentDidMount() {}
+
+  renderItem = ({item, index}) => {
+    return (
+      <View
+        style={{
+          width: screenWidth / 2 - 30,
+          height: 200,
+          borderWidth: 1,
+          elevation: 2,
+          marginVertical: 10,
+        }}>
+        <Text>{item.name}</Text>
+      </View>
     );
-
-    web3.eth.getBlock('latest').then(console.log('API CALLED'));
-  }
-
+  };
   render() {
     return (
       <SafeAreaView style={{flex: 1}}>
         <View style={styles.OnboardingGuideView}>
-          <ImageBackground
-            style={styles.image_BgImage}
-            source={require('./assets/77000000514a24a824f9b6e2b68bff2c8a8399a9.png')}>
-            <TouchableOpacity
-              onPress={() => Alert.alert('HELLO')}
-              style={styles.closeView}>
-              <Image
-                style={styles.image_CloseImage}
-                source={require('./assets/321679481c4d3328d65164c2c7dd1ccdb243bc24.png')}
-              />
-            </TouchableOpacity>
-            <View style={styles.middleView}>
-              <View>
-                <Image
-                  style={styles.image_PeopleImage}
-                  source={require('./assets/005108c9ab8c3a4b26cdf2d97386e68bc66a1ec1.png')}
-                />
-              </View>
-              <View>
-                <Text style={styles.welcomeTxt}>
-                  Welcome to the {'\n'}
-                  <Text style={styles.welcomeTxtBold}>
-                    Moderator Orientation Module
-                  </Text>
-                </Text>
-              </View>
-              <View>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate('Criteria')}
-                  // onPress={() => alert('Hello')}
-                  style={styles.button1}>
-                  <Text style={{width: 20}}></Text>
-                  <Text style={styles.textStyle}>Criteria & Benefits</Text>
-                  <Icon name={'chevron-right'} size={20} color={'#27272A'} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => Alert.alert('HELLO')}
-                  style={styles.button1}>
-                  <Text style={{width: 20}}></Text>
-                  <Text style={styles.textStyle}>Moderator Orientation</Text>
-                  <Icon name={'chevron-right'} size={20} color={'#27272A'} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => Alert.alert('HELLO')}
-                  style={styles.button1}>
-                  <Text style={{width: 20}}></Text>
-                  <Text style={styles.textStyle}>
-                    Fill in additional details
-                  </Text>
-                  <Icon name={'chevron-right'} size={20} color={'#27272A'} />
-                </TouchableOpacity>
-              </View>
-            </View>
-          </ImageBackground>
+          <FlatList
+            data={INITIAL_DATA}
+            // horizontal
+            numColumns={2}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={this.renderItem}
+          />
+          <Text> ADARSH SHARMA</Text>
         </View>
       </SafeAreaView>
     );

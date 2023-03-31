@@ -7,6 +7,7 @@ import Criteria from './screens/Criteria';
 import Questions from './screens/Questions';
 import QuestionScreen from './screens/QuestionScreen';
 import './global';
+import TestFlatList from './screens/TestFlatList';
 const Stack = createNativeStackNavigator();
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         screenOptions={{
           headerShown: false,
         }}>
+        <Stack.Screen name="TestFlatList" component={TestFlatList} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Criteria" component={Criteria} />
         <Stack.Screen name="QuestionScreen" component={QuestionScreen} />
